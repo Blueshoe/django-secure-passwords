@@ -16,9 +16,10 @@ pip3 install django-secure-passwords
 
 Add *"django-secure-passwords"* to your *INSTALLED_APPS*: 
 ```python
-INSTALLED_APPS += (
-    'securepasswords',
-)
+INSTALLED_APPS = [
+    "...",
+    "securepasswords",
+]
 ```
 
 ## Usage
