@@ -23,3 +23,7 @@ INSTALLED_APPS = [
 ```
 
 ## Usage
+
+# TODO prettify
+Recommended: usage of `AbstractBaseUser` subclass as `AUTH_USER_MODEL`
+

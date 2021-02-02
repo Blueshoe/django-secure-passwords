@@ -4,6 +4,8 @@ repos:
   rev: 5.6.4
   hooks:
   - id: isort
+    language: python
+    language_version: python3.8
 
 # black - format python code
 - repo: https://github.com/ambv/black
@@ -32,13 +34,19 @@ repos:
 -   repo: https://github.com/jorisroovers/gitlint
     rev:  v0.15.0
     hooks:
-    -   id: gitlint
+    - id: gitlint
+      language: python
+      language_version: python3.8
+#      args:
+#        - "--ignore=body-is-missing"
 
 # flake8 - style guide enforcement
 - repo: https://gitlab.com/pycqa/flake8
   rev: 3.8.4
   hooks:
     - id: flake8
+      language: python
+      language_version: python3.8
       args: # arguments to configure flake8
         # making line length compatible with black
         - "--max-line-length=120"

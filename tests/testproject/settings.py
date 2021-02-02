@@ -26,6 +26,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "securepasswords",
+    }
+}
+
 SITE_ID = 1
 
 MEDIA_URL = "/media/"
