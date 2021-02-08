@@ -22,7 +22,7 @@ repos:
           \.mypy_cache|
           \.tox|
           \.venv|
-          migrations|
+          *migrations|
           _build|
           buck-out|
           build|

@@ -1,5 +1,5 @@
-from django.contrib.auth import get_user_model, password_validation
-from django.contrib.auth.hashers import check_password, is_password_usable
+from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import check_password
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 

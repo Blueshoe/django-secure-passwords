@@ -15,6 +15,7 @@ setup(
     python_requires="~=3.8",
     packages=[
         "securepasswords",
+        "securepasswords.migrations",
     ],
     author="Veit Rückert",
     author_email="veit@blueshoe.de",
