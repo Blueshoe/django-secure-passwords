@@ -18,7 +18,7 @@ class SecurePasswordConfig:
         self.CHANGE_PASSWORD_URL = options.get("CHANGE_PASSWORD_URL", None)
 
     def get_options(self):
-        options = deepcopy(DEFAULTS)
+        options = {k: v[0] for k, v in DEFAULTS.items()}
         options.update(self.get_settings_overrides())
         return options
 
@@ -26,7 +26,7 @@ class SecurePasswordConfig:
         overrides = getattr(settings, "SECURE_PASSWORDS", {})
         if not isinstance(overrides, dict):
             raise ImproperlyConfigured("'SECURE_PASSWORDS' settings must be a dictionary")
-        for k, v in overrides:
+        for k, v in overrides.items():
             if k in DEFAULTS:
                 type_ = DEFAULTS[k][1]
                 if not isinstance(v, type_):

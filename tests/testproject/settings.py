@@ -15,7 +15,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "securepasswords",
 ]
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -23,8 +22,10 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "securepasswords.middleware.SecurePasswordMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 DATABASES = {
     "default": {
@@ -93,16 +94,22 @@ AUTH_PASSWORD_VALIDATORS = [
     #         'min_length': 9,
     #     }
     # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
     {
         "NAME": "securepasswords.validators.HistoryValidator",
-        "OPTIONS": {
-            "last_n": 4,
-        },
+    },
+    {
+        "NAME": "securepasswords.validators.RepeatedCharValidator",
     },
 ]
+
+SECURE_PASSWORDS = {
+    "MAX_PASSWORD_AGE": 1,  # days
+    "PASSWORD_HISTORY_LENGTH": 4,  # do not reuse the last n passwords
+    # "CHANGE_PASSWORD_URL": ("password_change", str),  # override may be view name or URL
+}
