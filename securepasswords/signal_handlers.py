@@ -14,7 +14,8 @@ __all__ = [
 
 @receiver(post_save, sender=get_user_model())
 def password_history_update(sender, **kwargs):
-    if profile := _password_changed(kwargs):
+    profile = _password_changed(kwargs)
+    if profile:
         profile.password_history.create(encoded=profile.user.password)
         profile.force_change = False
         profile.save(update_fields=("force_change",))

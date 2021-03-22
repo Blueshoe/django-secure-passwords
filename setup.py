@@ -15,7 +15,7 @@ setup(
     install_requires=[
         "Django>=2.2",
     ],
-    python_requires="~=3.8",
+    python_requires="~=3.6",
     packages=[
         "securepasswords",
         "securepasswords.migrations",
