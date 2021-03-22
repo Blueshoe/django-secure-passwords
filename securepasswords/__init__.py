@@ -1,3 +1,3 @@
 default_app_config = "securepasswords.apps.SecurePasswordsConfig"
 
-VERSION = "0.0.1"
+VERSION = "0.0.2"
