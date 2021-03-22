@@ -48,9 +48,9 @@ class ArithmeticSequenceValidator:
         for k, g in groupby(raw_password, key=str.isdigit):
             if k and self.is_arithemtic_sequence(list(map(int, g))):
                 raise ValidationError(
-                    _(
-                        "Your password must contains an arithmetic sequence ('456', '642', etc.) " "longer than {n}"
-                    ).format(n=self.n)
+                    _("Your password contains an arithmetic sequence ('456', '642', etc.) longer than {n}").format(
+                        n=self.n
+                    )
                 )
 
     def get_help_text(self):

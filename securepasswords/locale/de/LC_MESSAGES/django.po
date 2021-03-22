@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-22 12:15-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin.py:35
+msgid "Force selected users to change their passwords"
+msgstr "Ausgewählte user zwingen, ihr Passwort zu ändern"
+
+#: apps.py:7
+msgid "secure passwords"
+msgstr "Passwortsicherheit"
+
+#: middleware.py:24
+msgid "You must change your password for security reasons!"
+msgstr "Sie müssen aus Sicherheitsgründen Ihr Passwort ändern!"
+
+#: middleware.py:34
+#, python-brace-format
+msgid ""
+"Your current password is older than {max_age} days. Please change your "
+"password now."
+msgstr ""
+"Ihr aktuelles Passwort ist älter als {max_age}. Bitte ändern Sie jetzt "
+"Ihr Passwort."
+
+#: models.py:11
+msgid "force change"
+msgstr "Änderung erzwingen"
+
+#: models.py:14
+msgid "password profile"
+msgstr "Passwortprofil"
+
+#: models.py:15
+msgid "password profiles"
+msgstr "Passwortprofile"
+
+#: models.py:35 models.py:39
+msgid "password"
+msgstr "Passwort"
+
+#: models.py:40
+msgid "passwords"
+msgstr "Passwörter"
+
+#: validators.py:20
+msgid "You have used this password before."
+msgstr "Sie haben dieses Passwort in der Vergangenheit bereits verwendet."
+
+#: validators.py:25
+msgid "You must not reuse a previous password."
+msgstr "Sie dürfen kein Passwort wiederverwenden."
+
+#: validators.py:35
+#, python-brace-format
+msgid "Your password contains more than {n} consecutive equal characters."
+msgstr "Ihr Passwort enthält mehr als {n} aufeinanderfolgende gleiche Zeichen."
+
+#: validators.py:40
+#, python-brace-format
+msgid ""
+"Your password must not contain more than {n} consecutive equal characters."
+msgstr ""
+"Ihr Passwort darf nicht mehr als {n} aufeinanderfolgende gleiche Zeichen enthalten."
+
+#: validators.py:52
+#, python-brace-format
+msgid ""
+"Your password contains an arithmetic sequence ('456', '642', etc.) longer than {n}"
+msgstr ""
+"Ihr Passwort enthält eine arithmetische Sequenz ('456', '642', etc.), die länger als "
+"{n} Zeichen ist."
+
+#: validators.py:57
+#, python-brace-format
+msgid ""
+"Your password must not contain an arithmetic sequence ('456', '642', etc.) "
+"longer than {n}"
+msgstr ""
+"Ihr Passwort darf keine eine arithmetische Sequenz ('456', '642', etc.) "
+"enthalten, die länger als {n} Zeichen ist."
