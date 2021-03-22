@@ -23,6 +23,7 @@ setup(
     author="Veit Rückert",
     author_email="veit@blueshoe.de",
     include_package_data=True,
+    package_data={"securepasswords": ["locale/*/LC_MESSAGES/*.mo"]},
     classifiers=[
         "Intended Audience :: Developers",
         "Topic :: Software Development",
