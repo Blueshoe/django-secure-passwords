@@ -113,3 +113,6 @@ SECURE_PASSWORDS = {
     "PASSWORD_HISTORY_LENGTH": 4,  # do not reuse the last n passwords
     # "CHANGE_PASSWORD_URL": ("password_change", str),  # override may be view name or URL
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+LOGIN_URL = "admin:login"

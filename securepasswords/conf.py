@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
@@ -7,6 +5,7 @@ DEFAULTS = {
     "MAX_PASSWORD_AGE": (None, int),
     "PASSWORD_HISTORY_LENGTH": (None, int),
     "CHANGE_PASSWORD_URL": ("password_change", str),  # override may be view name or URL
+    "RESET_PASSWORD_URL": ("password_reset", str),  # override may be view name or URL
 }
 
 
