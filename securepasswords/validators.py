@@ -59,5 +59,13 @@ class ArithmeticSequenceValidator:
         )
 
     def is_arithemtic_sequence(self, seq: List[int]) -> bool:
-        # TODO
-        return False
+        for i in range(len(seq)):
+            digits = [int(digit) for digit in str(seq[i])]
+            if len(digits)< 2:
+                return False
+            else:
+                diff = digits[1] - digits[0]
+                for j in range(len(digits)-1):
+                    if not (digits[j +1] - digits[j] == diff):
+                        return False
+        return True
