@@ -1,4 +1,4 @@
-![django-secure-passwords logo](https://gitlab.blueshoe.de/Blueshoe/django-secure-passwords/raw/master/docs/_static/img/logo.png)
+![django-secure-passwords logo](https://github.com//Blueshoe/django-secure-passwords/raw/master/docs/_static/img/logo.png)
 
 --------------------------------------------------------------------------------
 

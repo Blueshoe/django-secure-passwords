@@ -39,7 +39,7 @@ SITE_ID = 1
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"
 
-ROOT_URLCONF = "urls"
+ROOT_URLCONF = "tests.testproject.urls"
 
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
