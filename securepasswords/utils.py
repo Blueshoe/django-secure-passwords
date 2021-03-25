@@ -6,7 +6,7 @@ from django.utils import timezone
 from securepasswords.models import Password, PasswordProfile
 
 
-def get_password_profile(user: AbstractBaseUser):
+def get_password_profile(user: AbstractBaseUser) -> PasswordProfile:
     profile, created = PasswordProfile.objects.get_or_create(user=user)
     if created and user.has_usable_password():
         profile.password_history.create(encoded=user.password)

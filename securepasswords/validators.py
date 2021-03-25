@@ -4,12 +4,13 @@ from typing import List
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
+from securepasswords.conf import conf
 from securepasswords.utils import get_password_profile
 
 
 class HistoryValidator:
     def __init__(self, last_n=None):
-        self.last_n = last_n
+        self.last_n = last_n or conf.PASSWORD_HISTORY_LENGTH
 
     def validate(self, raw_password, user=None):
         if not (user and user.pk):

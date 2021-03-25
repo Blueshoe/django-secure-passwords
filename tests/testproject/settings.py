@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 SECURE_PASSWORDS = {
     "MAX_PASSWORD_AGE": 1,  # days
-    "PASSWORD_HISTORY_LENGTH": 4,  # do not reuse the last n passwords
+    "PASSWORD_HISTORY_LENGTH": 2,  # do not reuse the last n passwords
     # "CHANGE_PASSWORD_URL": ("password_change", str),  # override may be view name or URL
 }
 
