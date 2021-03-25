@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -26,6 +26,10 @@ jobs:
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --exit-zero --max-complexity=18 --max-line-length=120 --statistics --ignore=E203,E266,E501,W503,F403,F401,E402 --select=B,C,E,F,W,T4,B9
+    - name: Lint with black
+      run: |
+        pip install black
+        black --check --line-length=120 securepasswords/
     - name: Test with django tests
       run: |
         coverage run manage.py test
@@ -37,7 +41,7 @@ jobs:
         flag-name: Unit Test
 
   coveralls_finish:
-    needs: test
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finished
