@@ -1,4 +1,4 @@
-name: Test application and generate coveralls
+name: Test and build
 
 on:
   push:
