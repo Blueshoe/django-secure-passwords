@@ -64,7 +64,7 @@ class ArithmeticSequenceValidator:
         sublists = []
         loop = (len(seq) - (self.n + 1)) + 1
         for x in range(loop):
-            sublists.append(seq[x:(x + (self.n + 1))])
+            sublists.append(seq[x : (x + (self.n + 1))])
 
         for sublist in sublists:
             if self.is_sublist_sequence(sublist):
