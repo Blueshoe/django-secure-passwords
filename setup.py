@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
-from setuptools import find_packages, setup
+import os
 
-VERSION = "0.0.5"
+from setuptools import setup
+
+base_dir = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(base_dir, "VERSION")) as f:
+    VERSION = f.read()
+
+with open(os.path.join(base_dir, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
+
 DESCRIPTION = (
     "django-secure-passwords is a package that adds more password validation options as "
     "often required in large corporations"
@@ -12,6 +20,8 @@ setup(
     name="django-secure-passwords",
     description=DESCRIPTION,
     version=VERSION,
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     install_requires=[
         "Django>=2.2",
     ],
