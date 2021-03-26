@@ -4,7 +4,7 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.translation import ugettext as _
 
 from .conf import conf
-from .utils import get_current_password_age, get_password_profile
+from .utils import get_password_profile
 
 
 class SecurePasswordMiddleware:
