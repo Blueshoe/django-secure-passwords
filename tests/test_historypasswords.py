@@ -76,4 +76,3 @@ class PasswordHistoryTest(TestCase):
         validate_password(pw, foo)
         foo.set_password(pw)
         foo.save()
-
