@@ -13,7 +13,6 @@ class PasswordHistoryTest(TestCase):
     """
 
     def setUp(self) -> None:
-        settings.SECURE_PASSWORDS = {"PASSWORD_HISTORY_LENGTH": 2}
         foo = User(username="foo")
         foo.set_password("supercalifragilisticexpialidocious")
         foo.save()
