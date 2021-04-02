@@ -59,6 +59,22 @@ class ArithmeticSequenceValidator:
             n=self.n
         )
 
-    def is_arithemtic_sequence(self, seq: List[int]) -> bool:
-        # TODO
+    def is_arithemtic_sequence(self, seq: list[int]) -> bool:
+        if len(seq) <= self.n:
+            return False
+        sublists = []
+        loop = (len(seq) - (self.n + 1)) + 1
+        for x in range(loop):
+            sublists.append(seq[x : (x + (self.n + 1))])
+
+        for sublist in sublists:
+            if self.is_sublist_sequence(sublist):
+                return True
         return False
+
+    def is_sublist_sequence(self, sub: list[int]) -> bool:
+        diff = sub[1] - sub[0]
+        for index in range(len(sub) - 1):
+            if not (sub[index + 1] - sub[index] == diff):
+                return False
+        return True

@@ -57,3 +57,21 @@ class PasswordHistoryTest(TestCase):
         validate_password(pw, foo)
         foo.set_password(pw)
         foo.save()
+
+    def test_d_set_arithmetic_sequence_password(self):
+        foo = User.objects.get(username="foo")
+        pw = "abc33215def85"
+        with self.assertRaises(ValidationError):
+            validate_password(pw, foo)
+
+    def test_d_set_random_sequence_password(self):
+        foo = User.objects.get(username="foo")
+        pw = "slhik1453fg486"
+        validate_password(pw, foo)
+        foo.set_password(pw)
+        foo.save()
+        # set a one more random sequence
+        pw = "ghup42895us471"
+        validate_password(pw, foo)
+        foo.set_password(pw)
+        foo.save()

@@ -106,6 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "securepasswords.validators.RepeatedCharValidator",
     },
+    {
+        "NAME": "securepasswords.validators.ArithmeticSequenceValidator",
+    },
 ]
 
 SECURE_PASSWORDS = {
