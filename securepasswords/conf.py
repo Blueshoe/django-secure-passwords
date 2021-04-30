@@ -15,6 +15,7 @@ class SecurePasswordConfig:
         self.MAX_PASSWORD_AGE = options.get("MAX_PASSWORD_AGE", None)
         self.PASSWORD_HISTORY_LENGTH = options.get("PASSWORD_HISTORY_LENGTH", None)
         self.CHANGE_PASSWORD_URL = options.get("CHANGE_PASSWORD_URL", None)
+        self.RESET_PASSWORD_URL = options.get("RESET_PASSWORD_URL", None)
 
     def get_options(self):
         options = {k: v[0] for k, v in DEFAULTS.items()}

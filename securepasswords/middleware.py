@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import NoReverseMatch, reverse
 from django.utils.translation import ugettext as _
@@ -20,6 +21,9 @@ class SecurePasswordMiddleware:
                 allowed_path = conf.CHANGE_PASSWORD_URL
             if current_path != allowed_path:
                 profile = get_password_profile(request.user)
+                if current_path == ("/" + conf.RESET_PASSWORD_URL + "/"):
+                    logout(request)
+                    return redirect("/" + conf.RESET_PASSWORD_URL + "/")
                 if profile.force_change:
                     messages.info(request, _("You must change your password for security reasons!"))
                     return redirect(conf.CHANGE_PASSWORD_URL)

@@ -6,6 +6,7 @@ from django.utils import timezone
 from securepasswords.models import PasswordProfile
 from securepasswords.middleware import conf
 
+
 class SecurePasswordMiddlewareTest(TestCase):
 
     @classmethod
@@ -62,6 +63,16 @@ class SecurePasswordMiddlewareTest(TestCase):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 302)
         self.assertEqual(reverse("password_change"), response.url)
+
+    def test_authenticated_user_old_password_reset_link(self):
+        # authenticated users with old password
+        # need to be redirected to the password change view
+        self.client.login(username="blueshoe2", password="supersecret")
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(reverse("password_change"), response.url)
+        response = self.client.get("/password_reset/")
+        self.assertEqual(response.status_code, 302)
 
     def test_authenticated_user_external_redirect(self):
         # authenticated users with force_change in their PasswordProfile
