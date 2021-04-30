@@ -72,3 +72,8 @@ class SecurePasswordMiddlewareTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(conf.CHANGE_PASSWORD_URL, response.url)
         conf.CHANGE_PASSWORD_URL = "password_change"
+
+    def test_reset_link(self):
+        # request simply passes through middleware
+        response = self.client.get("/password_reset/")
+        self.assertEqual(response.status_code, 200)
