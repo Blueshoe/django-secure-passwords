@@ -26,6 +26,54 @@ INSTALLED_APPS = [
 ]
 ```
 
+
+
+## Tracking of login attempts and account blocking
+To track login attempts and lock account after a number of unsuccessful attempts use 
+[django-axes](https://github.com/jazzband/django-axes/) package. It can log successful and unsuccessful attempts, saving 
+this information to the database. The record consists of time of login, IP address, user 
+agent, username, path to which the login was attempted and the number of failed attempts.
+
+To install this package, run:
+```bash
+pip3 install django-axes
+```
+
+Then, according to the [installation guide](https://django-axes.readthedocs.io/en/latest/2_installation.html) you need
+to add these settings to your settings.py file:
+
+```python
+INSTALLED_APPS = [
+    '...',
+    # Axes app can be in any position in the INSTALLED_APPS list.
+    'axes',
+]
+```
+
+```python
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+    '...',
+]
+```
+
+```python
+MIDDLEWARE = [
+    # The following is the list of default middleware in new Django projects.
+    '...',
+    # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
+    # It only formats user lockout messages and renders Axes lockout responses
+    # on failed user authentication attempts from login views.
+    # If you do not want Axes to override the authentication response
+    # you can skip installing the middleware and use your own views.
+    'axes.middleware.AxesMiddleware',
+]
+```
+
+Different [configuration variables](https://django-axes.readthedocs.io/en/latest/4_configuration.html) are available, 
+those variables can be directly added to the settings.py file.
+
 ## Usage
 
 # TODO prettify
