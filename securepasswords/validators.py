@@ -100,6 +100,6 @@ class AlphabeticSequenceValidator(SequenceValidator):
         )
 
     def _get_error_text(self):
-        return _("Your password contains an arithmetic sequence ('dcba', 'aceg', etc.) longer than {n}").format(
+        return _("Your password contains an alphabetic sequence ('dcba', 'aceg', etc.) longer than {n}").format(
             n=self.n
         )
