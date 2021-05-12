@@ -85,15 +85,15 @@ LOGGING = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    #     'OPTIONS': {
-    #         'min_length': 9,
-    #     }
-    # },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 15,
+        },
+    },
     {
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
@@ -105,6 +105,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         "NAME": "securepasswords.validators.RepeatedCharValidator",
+    },
+    {
+        "NAME": "securepasswords.validators.ArithmeticSequenceValidator",
+        "OPTIONS": {
+            "max_length": 2,
+        },
+    },
+    {
+        "NAME": "securepasswords.validators.AlphabeticSequenceValidator",
+        "OPTIONS": {
+            "max_length": 3,
+        },
     },
 ]
 
