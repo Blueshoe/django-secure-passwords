@@ -41,28 +41,65 @@ class RepeatedCharValidator:
         return _("Your password must not contain more than {n} consecutive equal characters.").format(n=self.n)
 
 
-class ArithmeticSequenceValidator:
+class SequenceValidator:
     def __init__(self, max_length=2):
         self.n = max_length
 
+    def _filter(self, char: str):
+        return NotImplemented
+
+    def _process(self, char: str):
+        return NotImplemented
+
+    def _get_error_text(self):
+        return NotImplemented
+
     def validate(self, raw_password, user=None):
-        for k, g in groupby(raw_password, key=str.isdigit):
-            if k and self.is_arithemtic_sequence(list(map(int, g))):
-                raise ValidationError(
-                    _("Your password contains an arithmetic sequence ('456', '642', etc.) longer than {n}").format(
-                        n=self.n
-                    )
-                )
+        for k, g in groupby(raw_password, key=self._filter):
+            if k and self.has_sequence(list(map(self._process, g))):
+                raise ValidationError(self._get_error_text())
 
-    def get_help_text(self):
-        return _("Your password must not contain an arithmetic sequence ('456', '642', etc.) longer than {n}").format(
-            n=self.n
-        )
-
-    def is_arithemtic_sequence(self, seq: List[int]) -> bool:
+    def has_sequence(self, seq: List) -> bool:
         check_length = self.n + 1
         for i in range(len(seq) - self.n):
             sub = seq[i : i + check_length]
             if len({a - b for a, b in zip(sub, sub[1:])}) == 1:
                 return True
         return False
+
+
+class ArithmeticSequenceValidator(SequenceValidator):
+    def _filter(self, char: str):
+        return char.isdigit()
+
+    def _process(self, char: str):
+        return int(char)
+
+    def get_help_text(self):
+        return _("Your password must not contain an arithmetic sequence ('456', '642', etc.) longer than {n}").format(
+            n=self.n
+        )
+
+    def _get_error_text(self):
+        return _("Your password contains an arithmetic sequence ('456', '642', etc.) longer than {n}").format(n=self.n)
+
+
+class AlphabeticSequenceValidator(SequenceValidator):
+    def __init__(self, max_length=3):
+        super(AlphabeticSequenceValidator, self).__init__(max_length=max_length)
+
+    def _filter(self, char: str):
+        return char.isalpha()
+
+    def _process(self, char: str):
+        return ord(char)
+
+    def get_help_text(self):
+        return _("Your password must not contain an alphabetic sequence ('dcba', 'aceg', etc.) longer than {n}").format(
+            n=self.n
+        )
+
+    def _get_error_text(self):
+        return _("Your password contains an arithmetic sequence ('dcba', 'aceg', etc.) longer than {n}").format(
+            n=self.n
+        )
