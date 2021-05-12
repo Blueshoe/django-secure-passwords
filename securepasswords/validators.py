@@ -60,5 +60,9 @@ class ArithmeticSequenceValidator:
         )
 
     def is_arithemtic_sequence(self, seq: List[int]) -> bool:
-        # TODO
+        check_length = self.n + 1
+        for i in range(len(seq) - self.n):
+            sub = seq[i : i + check_length]
+            if len({a - b for a, b in zip(sub, sub[1:])}) == 1:
+                return True
         return False
