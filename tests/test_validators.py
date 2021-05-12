@@ -79,6 +79,16 @@ class ArithmeticSequenceTest(TestCase):
         except ValidationError:
             self.fail(f"'{pw}' should pass validation")
 
+    def test_f_helptext(self):
+        v3 = ArithmeticSequenceValidator(3)
+        v5 = ArithmeticSequenceValidator(5)
+        h3 = v3.get_help_text()
+        h5 = v5.get_help_text()
+        self.assertIn("longer than 3", h3)
+        self.assertIn("longer than 5", h5)
+        self.assertIn("Your password must not contain an arithmetic sequence", h3)
+        self.assertIn("Your password must not contain an arithmetic sequence", h5)
+
 
 class AlphabeticSequenceTest(TestCase):
     def setUp(self) -> None:
@@ -152,3 +162,13 @@ class AlphabeticSequenceTest(TestCase):
             self.alphabetic_max_2(pw, self.user)
         except ValidationError:
             self.fail(f"'{pw}' should pass validation")
+
+    def test_f_helptext(self):
+        v3 = AlphabeticSequenceValidator(3)
+        v5 = AlphabeticSequenceValidator(5)
+        h3 = v3.get_help_text()
+        h5 = v5.get_help_text()
+        self.assertIn("longer than 3", h3)
+        self.assertIn("longer than 5", h5)
+        self.assertIn("Your password must not contain an alphabetic sequence", h3)
+        self.assertIn("Your password must not contain an alphabetic sequence", h5)
