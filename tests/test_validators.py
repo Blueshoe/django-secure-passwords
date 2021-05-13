@@ -3,7 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from securepasswords.validators import AlphabeticSequenceValidator, ArithmeticSequenceValidator
+from securepasswords.validators import AlphabeticSequenceValidator, ArithmeticSequenceValidator, CharacterClassValidator
 
 
 class ArithmeticSequenceTest(TestCase):
@@ -172,3 +172,70 @@ class AlphabeticSequenceTest(TestCase):
         self.assertIn("longer than 5", h5)
         self.assertIn("Your password must not contain an alphabetic sequence", h3)
         self.assertIn("Your password must not contain an alphabetic sequence", h5)
+
+
+class CharacterClassTest(TestCase):
+    def setUp(self) -> None:
+        self.char_min_2 = CharacterClassValidator(min_count=2).validate
+        self.char_min_4 = CharacterClassValidator(min_count=4).validate
+
+    def test_a_fail2(self):
+        pws = [
+            "abcdefghè",
+            "ABCDEFGHÈ",
+            "\t \t \t",
+            "87654321",
+            "!§$%&/()[]{\\}",
+        ]
+        for pw in pws:
+            self.failUnlessRaises(ValidationError, self.char_min_2, pw)
+
+    def test_b_pass2(self):
+        pws = [
+            "abcdefghèABCDEFGHÈ",
+            "abcdefghè\t \t \t",
+            "abcdefghè87654321",
+            "abcdefghè!§$%&/()[]{\\}",
+            "ABCDEFGHÈ\t \t \t",
+            "ABCDEFGHÈ87654321ef",
+            "ABCDEFGHÈ!§$%&/()[]{\\}",
+            "\t \t \t87654321",
+            "\t \t \t!§$%&/()[]{\\}cd",
+            "87654321!§$%&/()[]{\\}xyEF",
+        ]
+        for pw in pws:
+            try:
+                self.char_min_2(pw)
+            except ValidationError:
+                self.fail(f"'{pw}' should pass validation")
+
+    def test_c_fail4(self):
+        pws = [
+            "abcdefghèABCDEFGHÈ",
+            "abcdefghè\t \t \tABCDEFGHÈ",
+            "abcdefghè87654321ABCDEFGHÈ",
+            "abcdefghè!§$%&/()[]{\\}",
+            "ABCDEFGHÈ\t \t \t",
+            "ABCDEFGHÈ87654321",
+            "ABCDEFGHÈ!§$%&/()[]{\\}",
+            "\t \t \t87654321ABCDEFGHÈ",
+            "!§$%&/()[]{\\}",
+            "87654321",
+        ]
+        for pw in pws:
+            self.failUnlessRaises(ValidationError, self.char_min_4, pw)
+
+    def test_c_pass4(self):
+        pws = [
+            "abcdefghèABCDEFGHÈ\t \t \t87654321!§$%&/()[]{\\}",
+            "ABCDEFGHÈ\t \t \t87654321!§$%&/()[]{\\}",
+            "abcdefghè\t \t \t87654321!§$%&/()[]{\\}",
+            "abcdefghèABCDEFGHÈ87654321!§$%&/()[]{\\}",
+            "abcdefghèABCDEFGHÈ\t \t \t!§$%&/()[]{\\}",
+            "abcdefghèABCDEFGHÈ\t \t \t87654321",
+        ]
+        for pw in pws:
+            try:
+                self.char_min_2(pw)
+            except ValidationError:
+                self.fail(f"'{pw}' should pass validation")
