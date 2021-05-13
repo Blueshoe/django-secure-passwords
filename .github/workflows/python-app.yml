@@ -32,7 +32,7 @@ jobs:
         black --check --line-length=120 securepasswords/
     - name: Test with django tests
       run: |
-        coverage run manage.py test
+        PYTHONPATH=tests/testproject coverage run manage.py test
 
     - name: Coveralls
       uses: AndreMiras/coveralls-python-action@develop

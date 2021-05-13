@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-22 12:15-0500\n"
+"POT-Creation-Date: 2021-05-13 09:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,82 +16,120 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin.py:35
+#: securepasswords/admin.py:35
 msgid "Force selected users to change their passwords"
-msgstr "Ausgewählte user zwingen, ihr Passwort zu ändern"
+msgstr "Ausgewählte Nutzer zwingen, ihre Passwörter zu ändern"
 
-#: apps.py:7
+#: securepasswords/apps.py:7
 msgid "secure passwords"
-msgstr "Passwortsicherheit"
+msgstr "sichere Passwörter"
 
-#: middleware.py:24
+#: securepasswords/middleware.py:24
 msgid "You must change your password for security reasons!"
-msgstr "Sie müssen aus Sicherheitsgründen Ihr Passwort ändern!"
+msgstr "Sie müssen aus Sicherheitsgründen Ihr Passwort ändern"
 
-#: middleware.py:34
+#: securepasswords/middleware.py:34
 #, python-brace-format
 msgid ""
 "Your current password is older than {max_age} days. Please change your "
 "password now."
 msgstr ""
-"Ihr aktuelles Passwort ist älter als {max_age}. Bitte ändern Sie jetzt "
-"Ihr Passwort."
+"Ihr aktuelles Passwort ist älter als {max_age} Tage. Bitte ändern Sie "
+"jetzt Ihr Passwort."
 
-#: models.py:11
+#: securepasswords/models.py:11
 msgid "force change"
 msgstr "Änderung erzwingen"
 
-#: models.py:14
+#: securepasswords/models.py:14
 msgid "password profile"
 msgstr "Passwortprofil"
 
-#: models.py:15
+#: securepasswords/models.py:15
 msgid "password profiles"
 msgstr "Passwortprofile"
 
-#: models.py:35 models.py:39
+#: securepasswords/models.py:35 securepasswords/models.py:39
 msgid "password"
 msgstr "Passwort"
 
-#: models.py:40
+#: securepasswords/models.py:40
 msgid "passwords"
 msgstr "Passwörter"
 
-#: validators.py:20
+#: securepasswords/validators.py:21
 msgid "You have used this password before."
-msgstr "Sie haben dieses Passwort in der Vergangenheit bereits verwendet."
+msgstr "Sie haben dieses Passwort bereits einmal verwendet."
 
-#: validators.py:25
+#: securepasswords/validators.py:26
 msgid "You must not reuse a previous password."
-msgstr "Sie dürfen kein Passwort wiederverwenden."
+msgstr "Sie dürfen Passwörter nicht wiederverwenden."
 
-#: validators.py:35
+#: securepasswords/validators.py:36
 #, python-brace-format
 msgid "Your password contains more than {n} consecutive equal characters."
-msgstr "Ihr Passwort enthält mehr als {n} aufeinanderfolgende gleiche Zeichen."
+msgstr "Ihr Passwort enthält mehr als {n} gleiche aufeinanderfolgende Zeichen."
 
-#: validators.py:40
+#: securepasswords/validators.py:41
 #, python-brace-format
 msgid ""
 "Your password must not contain more than {n} consecutive equal characters."
 msgstr ""
-"Ihr Passwort darf nicht mehr als {n} aufeinanderfolgende gleiche Zeichen enthalten."
+"Ihr Passwort darf nicht mehr als {n} gleiche aufeinanderfolgende Zeichen enthalten."
 
-#: validators.py:52
-#, python-brace-format
-msgid ""
-"Your password contains an arithmetic sequence ('456', '642', etc.) longer than {n}"
-msgstr ""
-"Ihr Passwort enthält eine arithmetische Sequenz ('456', '642', etc.), die länger als "
-"{n} Zeichen ist."
-
-#: validators.py:57
+#: securepasswords/validators.py:79
 #, python-brace-format
 msgid ""
 "Your password must not contain an arithmetic sequence ('456', '642', etc.) "
 "longer than {n}"
 msgstr ""
-"Ihr Passwort darf keine eine arithmetische Sequenz ('456', '642', etc.) "
-"enthalten, die länger als {n} Zeichen ist."
+"Ihr Passwort darf keine arithmetische Sequenz ('456', '642', etc.) enthalten, "
+"die länger als {n} ist."
+
+#: securepasswords/validators.py:84
+#, python-brace-format
+msgid ""
+"Your password contains an arithmetic sequence ('456', '642', etc.) longer "
+"than {n}"
+msgstr ""
+"Ihr Passwort enthält eine arithmetische Sequenz ('456', '642', etc.), "
+"die länger als {n} ist."
+
+#: securepasswords/validators.py:98
+#, python-brace-format
+msgid ""
+"Your password must not contain an alphabetic sequence ('dcba', 'aceg', etc.) "
+"longer than {n}"
+msgstr ""
+"Ihr Passwort darf keine alphabetische Abfolge ('dcba', 'aceg', etc.) enthalten, "
+"die länger als {n} ist."
+
+#: securepasswords/validators.py:103
+#, python-brace-format
+msgid ""
+"Your password contains an alphabetic sequence ('dcba', 'aceg', etc.) longer "
+"than {n}"
+msgstr ""
+"Ihr Passwort enthält eine alphabetische Abfolge ('dcba', 'aceg', etc.), "
+"die länger als {n} ist."
+
+#: securepasswords/validators.py:125
+#, python-brace-format
+msgid ""
+"Your password must contain characters from at least {n} categories out of "
+"the following 5: Uppercase letters, lowercase letters, digits, punctuation, "
+"whitespace"
+msgstr ""
+"Ihr Passwort muss Zeichen aus mindestens {n} der folgenden 5 Klassen enthalten: "
+"Großbuchstaben, Kleinbuchstaben, Ziffern, Sonderzeichen, Leerzeichen"
+
+#: securepasswords/validators.py:134
+#, python-brace-format
+msgid ""
+"Your password contains characters from fewer than {n} categories out of the "
+"following 5: Uppercase letters, lowercase letters, digits, punctuation, "
+"whitespace"
+msgstr ""
+"Ihr Passwort enthält Zeichen aus weniger als {n} der folgenden 5 Klassen: "
+"Großbuchstaben, Kleinbuchstaben, Ziffern, Sonderzeichen, Leerzeichen"

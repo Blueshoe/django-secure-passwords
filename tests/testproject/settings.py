@@ -39,7 +39,7 @@ SITE_ID = 1
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"
 
-ROOT_URLCONF = "tests.testproject.urls"
+ROOT_URLCONF = "urls"
 
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -118,6 +118,12 @@ AUTH_PASSWORD_VALIDATORS = [
             "max_length": 3,
         },
     },
+    {
+        "NAME": "securepasswords.validators.CharacterClassValidator",
+        "OPTIONS": {
+            "min_count": 3,
+        },
+    },
 ]
 
 SECURE_PASSWORDS = {
@@ -128,3 +134,11 @@ SECURE_PASSWORDS = {
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 LOGIN_URL = "admin:login"
+
+USE_I18N = True
+LANGUAGE_CODE = "en-us"
+
+LANGUAGES = [
+    ("en", "English"),
+    ("de", "German"),
+]
