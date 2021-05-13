@@ -118,6 +118,12 @@ AUTH_PASSWORD_VALIDATORS = [
             "max_length": 3,
         },
     },
+    {
+        "NAME": "securepasswords.validators.CharacterClassValidator",
+        "OPTIONS": {
+            "min_count": 3,
+        },
+    },
 ]
 
 SECURE_PASSWORDS = {
