@@ -39,7 +39,7 @@ SITE_ID = 1
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"
 
-ROOT_URLCONF = "tests.testproject.urls"
+ROOT_URLCONF = "urls"
 
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -85,15 +85,15 @@ LOGGING = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    #     'OPTIONS': {
-    #         'min_length': 9,
-    #     }
-    # },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 15,
+        },
+    },
     {
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
@@ -106,6 +106,24 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "securepasswords.validators.RepeatedCharValidator",
     },
+    {
+        "NAME": "securepasswords.validators.ArithmeticSequenceValidator",
+        "OPTIONS": {
+            "max_length": 2,
+        },
+    },
+    {
+        "NAME": "securepasswords.validators.AlphabeticSequenceValidator",
+        "OPTIONS": {
+            "max_length": 3,
+        },
+    },
+    {
+        "NAME": "securepasswords.validators.CharacterClassValidator",
+        "OPTIONS": {
+            "min_count": 3,
+        },
+    },
 ]
 
 SECURE_PASSWORDS = {
@@ -116,3 +134,11 @@ SECURE_PASSWORDS = {
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 LOGIN_URL = "admin:login"
+
+USE_I18N = True
+LANGUAGE_CODE = "en-us"
+
+LANGUAGES = [
+    ("en", "English"),
+    ("de", "German"),
+]

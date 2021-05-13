@@ -29,6 +29,8 @@ setup(
     packages=[
         "securepasswords",
         "securepasswords.migrations",
+        "securepasswords.management",
+        "securepasswords.management.commands",
     ],
     author="Veit Rückert",
     author_email="veit@blueshoe.de",

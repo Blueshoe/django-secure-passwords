@@ -1,7 +1,7 @@
 from itertools import groupby
 from typing import List
 
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.utils.translation import gettext as _
 
 from securepasswords.conf import conf
@@ -103,3 +103,35 @@ class AlphabeticSequenceValidator(SequenceValidator):
         return _("Your password contains an alphabetic sequence ('dcba', 'aceg', etc.) longer than {n}").format(
             n=self.n
         )
+
+
+_char_class_tests = (str.isupper, str.islower, str.isdigit, str.isspace)
+
+
+def ispunct(char: str):
+    return not any(t(char) for t in _char_class_tests)
+
+
+class CharacterClassValidator:
+    TESTS = _char_class_tests + (ispunct,)
+
+    def __init__(self, min_count: int = 2):
+        if min_count not in range(2, 6):
+            raise ImproperlyConfigured("The only valid 'min_count' arguments are 2, 3, 4, or 5")
+        self.min_count = min_count
+
+    def get_help_text(self):
+        return _(
+            "Your password must contain characters from at least {n} categories out of the following 5: "
+            "Uppercase letters, lowercase letters, digits, punctuation, whitespace"
+        ).format(n=self.min_count)
+
+    def validate(self, raw_password, user=None):
+        count = sum(any(map(test, raw_password)) for test in self.TESTS)
+        if count < self.min_count:
+            raise ValidationError(
+                _(
+                    "Your password contains characters from fewer than {n} categories out of the following 5: "
+                    "Uppercase letters, lowercase letters, digits, punctuation, whitespace"
+                ).format(n=self.min_count)
+            )

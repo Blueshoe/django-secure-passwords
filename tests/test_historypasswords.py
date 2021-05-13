@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from securepasswords.utils import get_password_profile
+from securepasswords.validators import HistoryValidator
 
 
 class PasswordHistoryTest(TestCase):
@@ -16,11 +17,12 @@ class PasswordHistoryTest(TestCase):
         foo = User(username="foo")
         foo.set_password("supercalifragilisticexpialidocious")
         foo.save()
+        self.historycheck = HistoryValidator().validate
 
     def test_a_set_new_password(self):
         foo = User.objects.get(username="foo")
         pw = "expialidocious"
-        validate_password(pw, foo)
+        self.historycheck(pw)
         foo.set_password(pw)
         foo.save()
 
@@ -28,32 +30,32 @@ class PasswordHistoryTest(TestCase):
         foo = User.objects.get(username="foo")
         pw = "supercalifragilisticexpialidocious"
         with self.assertRaises(ValidationError):
-            validate_password(pw, foo)
+            self.historycheck(pw, foo)
 
     def test_c_reuse_password_after_one(self):
         foo = User.objects.get(username="foo")
         # set a second
         pw = "expialidocious"
-        validate_password(pw, foo)
+        self.historycheck(pw, foo)
         foo.set_password(pw)
         foo.save()
         with self.assertRaises(ValidationError):
-            validate_password("supercalifragilisticexpialidocious", foo)
+            self.historycheck("supercalifragilisticexpialidocious", foo)
 
     def test_c_reuse_password_after_two(self):
         foo = User.objects.get(username="foo")
         # set a second
         pw = "expialidocious"
-        validate_password(pw, foo)
+        self.historycheck(pw, foo)
         foo.set_password(pw)
         foo.save()
         # set a third
         pw = "superdocious"
-        validate_password(pw, foo)
+        self.historycheck(pw, foo)
         foo.set_password(pw)
         foo.save()
         # forth password to be successful
         pw = "supercalifragilisticexpialidocious"
-        validate_password(pw, foo)
+        self.historycheck(pw, foo)
         foo.set_password(pw)
         foo.save()

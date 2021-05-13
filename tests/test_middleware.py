@@ -3,32 +3,22 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from securepasswords.models import PasswordProfile
 from securepasswords.middleware import conf
+from securepasswords.models import PasswordProfile
+
 
 class SecurePasswordMiddlewareTest(TestCase):
-
     @classmethod
     def setUpClass(cls):
-        cls.user = User.objects.create(
-            username="blueshoe",
-            is_active=True
-        )
-        cls.user.set_password(
-            "supersecret"
-        )
+        cls.user = User.objects.create(username="blueshoe", is_active=True)
+        cls.user.set_password("supersecret")
         cls.user.save()
         cls.profile = PasswordProfile.objects.get(user=cls.user)
         cls.profile.force_change = True
         cls.profile.save()
 
-        cls.user2 = User.objects.create(
-            username="blueshoe2",
-            is_active=True
-        )
-        cls.user2.set_password(
-            "supersecret"
-        )
+        cls.user2 = User.objects.create(username="blueshoe2", is_active=True)
+        cls.user2.set_password("supersecret")
         cls.user2.save()
 
         cls.profile2 = PasswordProfile.objects.get(user=cls.user2)
