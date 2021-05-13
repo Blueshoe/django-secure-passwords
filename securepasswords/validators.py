@@ -122,7 +122,7 @@ class CharacterClassValidator:
 
     def get_help_text(self):
         return _(
-            "Your password must contain characters from at least {n} categories out of the following 5:"
+            "Your password must contain characters from at least {n} categories out of the following 5: "
             "Uppercase letters, lowercase letters, digits, punctuation, whitespace"
         ).format(n=self.min_count)
 
@@ -131,7 +131,7 @@ class CharacterClassValidator:
         if count < self.min_count:
             raise ValidationError(
                 _(
-                    "Your password contains characters from fewer than {n} categories out of the following 5:"
+                    "Your password contains characters from fewer than {n} categories out of the following 5: "
                     "Uppercase letters, lowercase letters, digits, punctuation, whitespace"
                 ).format(n=self.min_count)
             )

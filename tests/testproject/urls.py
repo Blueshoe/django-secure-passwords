@@ -3,8 +3,7 @@ from django.conf.urls.static import static
 from django.contrib.admin import site
 from django.contrib.auth import views
 from django.urls import include, path
-
-from tests.testproject.views import home
+from views import home
 
 urlpatterns = [
     path("admin/", site.urls),
