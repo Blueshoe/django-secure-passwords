@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.test import TestCase
 
 from securepasswords.validators import AlphabeticSequenceValidator, ArithmeticSequenceValidator, CharacterClassValidator
@@ -239,3 +239,32 @@ class CharacterClassTest(TestCase):
                 self.char_min_2(pw)
             except ValidationError:
                 self.fail(f"'{pw}' should pass validation")
+
+    def test_d_config_ok(self):
+        try:
+            CharacterClassValidator(min_count=2)
+            CharacterClassValidator(min_count=3)
+            CharacterClassValidator(min_count=4)
+            CharacterClassValidator(min_count=5)
+        except ImproperlyConfigured:
+            self.fail("Validator parameters are fine. No exception expected!")
+
+    def test_e_config_bad(self):
+        try:
+            CharacterClassValidator(min_count=1)
+            self.fail("Bad parameter. Exception expected!")
+        except ImproperlyConfigured:
+            pass
+        try:
+            CharacterClassValidator(min_count=6)
+            self.fail("Bad parameter. Exception expected!")
+        except ImproperlyConfigured:
+            pass
+
+    def test_f_helptext(self):
+        v3 = CharacterClassValidator(3)
+        v5 = CharacterClassValidator(5)
+        h3 = v3.get_help_text()
+        h5 = v5.get_help_text()
+        self.assertIn("from at least 3 categories", h3)
+        self.assertIn("from at least 5 categories", h5)
