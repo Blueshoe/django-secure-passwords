@@ -24,6 +24,7 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=[
         "Django>=2.2",
+        "django-axes>=5.14.0",
     ],
     python_requires="~=3.6",
     packages=[
